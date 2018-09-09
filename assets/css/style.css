@@ -11,12 +11,12 @@ h1{
     font-size: 64pt;
 }
 
-.container{
+.header{
     background-image: url(../images/background-image.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     height: 550px;
-    width: 80%;
+    width: 100%;
     margin: 100 auto;
 }
 
@@ -29,4 +29,15 @@ h1{
     margin: 0 auto;
     right: 40%;
  
+}
+/* #show-number{
+    text-align: center;
+    color: whitesmoke;
+
+} */
+.game{
+    font-size: 16pt;
+    font-weight: bold;
+    text-align: left;
+
 }
