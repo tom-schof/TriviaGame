@@ -1,0 +1,32 @@
+body{
+    background-image: url(../images/topography/topography.png);
+    background-size: cover;
+}
+
+h1{
+    color: whitesmoke;
+    font-family: 'Lobster', cursive;
+    margin: 10 auto;
+    text-align: center;
+    font-size: 64pt;
+}
+
+.container{
+    background-image: url(../images/background-image.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 550px;
+    width: 80%;
+    margin: 100 auto;
+}
+
+.start{
+    position: relative;
+    height: 150px;
+}
+.btn-large{
+    position: absolute;
+    margin: 0 auto;
+    right: 40%;
+ 
+}
