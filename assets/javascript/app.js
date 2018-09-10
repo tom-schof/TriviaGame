@@ -58,10 +58,7 @@ function decrement() {
     if (number === 0) {
         stop();
         alert("Time Up!");
-        number = 45;
-        $(".start").show();
-        $(".game").empty();
-        $("#show-number").empty();
+        reset();
     }
 }
 
@@ -79,7 +76,7 @@ function createQuestions() {
         for (var j = 0; j < trivia[i].answers.length; j++) {
             var p = $("<p>");
             var label = $("<label>");
-            var input = $("<input name='group" + i + "' type='radio' />");
+            var input = $("<input name='group" + i + "' id='" + trivia[i].answers[j] + "'  class='with-gap' type='radio' />");
             var span = $("<span>" + trivia[i].answers[j] + "</span>");
 
             answerDiv.append(p);
@@ -93,6 +90,8 @@ function createQuestions() {
     }
     $(".game").append("<button class='btn waves-effect waves-light' id='submit' type='submit' name='action'><i class='material-icons'>SUBMIT</i></button>");
 
+
+
 }
 
 
@@ -100,25 +99,40 @@ function createQuestions() {
 function start() {
     console.log('button clicked');
     $(".start").hide();
+    $(".game").show();
+    $("#show-number").show();
+    $("#results").show();
     createQuestions();
     runTimer();
 }
 
 function getValues() {
     console.log("get value ran");
-    $(document).ready(function () {
+    // $(document).ready(function () {
 
-        for (var i = 0; i < trivia.length; i++) {
-            $("input[type='radio']").click(function () {
-                var radioValue = $("input[name='group" + i + "']:checked").val();
-                if (radioValue == trivia[i].correct) {
-                    correct++;
-                } else {
-                    wrong++;
-                }
-            });
+    for (var i = 0; i < trivia.length; i++) {
+        console.log("i: " + i);
+        // var onevalue = $("input[name='group1']:checked").html();
+
+        var radioValue = $("input[name='group" + i + "']:checked")[0];
+        console.log( typeof radioValue);
+
+        if ((typeof radioValue) != 'undefined') {
+            radioValue = radioValue.id;
+            if (radioValue == trivia[i].correct) {
+                correct++;
+
+            } else {
+                wrong++;
+            }
+        }else {
+            wrong++;
         }
-    });
+        console.log(radioValue);
+
+
+    }
+    // });
 
 }
 
@@ -154,19 +168,32 @@ function checkAnswers() {
         $(".game").append(questionDiv);
         $(".game").append(answerDiv);
     }
-    $(".header").append("<h2> You got " + correct + " questions right and " + wrong + " questions wrong!");
+    $(".header").append("<h2 id='results'> You got " + correct + " questions right and " + wrong + " questions wrong!");
+
+
+}
+
+function reset() {
+    number = 45;
+    correct = 0;
+    wrong = 0;
+    $(".start").show();
+    $(".game").empty().show();
+    $("#show-number").empty().hide();
+    $("#results").empty().hide();
 
 
 }
 
 $("#start-quiz").on("click", start);
 
+
+
 $(".game").on('click', '#submit', function () {
     event.preventDefault();
     checkAnswers();
     stop();
-    number = 45;
-    // $(".start").show();
-    // $(".game").empty();
-    // $("#show-number").empty();
+
+    setTimeout(reset, 10000);
+
 });
